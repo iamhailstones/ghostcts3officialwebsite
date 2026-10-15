@@ -1,19 +1,45 @@
-HAILSTONES — RED/BLACK DEMONIC LANDING PAGE
+# Hailstones
 
-Files:
-- index.html: complete single-file website (HTML, CSS, and JavaScript included).
+Personal portfolio for **Hailstones** — developer, game creator, and the person behind [GHOST CTS-3: Code to Survive](https://iamhailstones.github.io/GHOST-CTS-3/).
 
-Preview locally:
-1. Open index.html in a browser, or open the folder in VS Code and use Live Server.
+A single-file site (HTML, CSS and vanilla JS) with a 3D phone in the hero: hailstones bounce on a line inside the screen while cards and orbs fly out toward you. Tilt it with your mouse or finger; scroll to push the pieces further out.
 
-Publish with GitHub Pages:
-1. Create a public repository, for example hailstones-home.
-2. Upload index.html to the repository root.
-3. Open Settings → Pages.
-4. Under Build and deployment, choose Deploy from a branch.
-5. Select branch main and folder /(root), then Save.
-6. Wait for GitHub Pages to publish the site.
+## Features
 
-The page is responsive and includes animated ember particles, a red/black occult sci-fi visual theme, hover effects, scroll reveals, mobile navigation, About, GHOST CTS-3 project, and social links.
+- 3D phone hero with parallax tilt (mouse and touch)
+- Hailstones bouncing on a glowing line (canvas)
+- Mobile-friendly layout, slide-down menu, notch and safe-area support
+- Reduced-motion support: animations switch off for users who prefer it
+- No build step, no dependencies (only Google Fonts)
 
-Before publishing, check the links in index.html. The YouTube card currently points to YouTube's homepage because a specific Hailstones channel URL was not provided.
+## Run locally
+
+Open `index.html` in a browser. Or serve the folder:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then visit `http://localhost:8000`.
+
+## Deploy (GitHub Pages)
+
+1. Push `index.html` and `README.md` to a repository.
+2. Go to **Settings → Pages**, choose the main branch, root folder, and save.
+3. Your site goes live at `https://<username>.github.io/<repo>/`.
+
+## Customise
+
+| What | Where in `index.html` |
+| --- | --- |
+| Social links | the `.links` block near the bottom |
+| Typed role lines | the `R` array in the script |
+| Hailstone sizes and speed | the `S` array in the script |
+| Colours | the `:root` variables at the top of the CSS |
+
+## Links
+
+- X: [@iamhailstones](https://x.com/iamhailstones)
+- Instagram: [@iamhailstones_](https://www.instagram.com/iamhailstones_/)
+- TikTok: [@iamhailstones](https://www.tiktok.com/@iamhailstones)
+- GitHub: [iamhailstones](https://github.com/iamhailstones)
