@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080303">
+<meta name="description" content="Hailstones — developer, game creator, digital builder, and creator of GHOST CTS-3: Code to Survive.">
+<title>HAILSTONES — Enter My World</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap');
+:root{--red:#ff102b;--red2:#9d0015;--ink:#050303;--panel:rgba(8,3,4,.88);--white:#f3e9e9;--muted:#b7a5a8;--line:rgba(255,16,43,.34)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:var(--ink);color:var(--white);font-family:'Rajdhani',sans-serif;overflow-x:hidden}a{color:inherit;text-decoration:none}button,a{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+::selection{background:var(--red);color:#000}
+body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse at 75% 12%,#53000c 0,transparent 32%),radial-gradient(ellipse at 10% 55%,#360008 0,transparent 38%),linear-gradient(130deg,#030202,#160307 48%,#030202)}
+#embers{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}.ember{position:absolute;bottom:-15px;width:3px;height:3px;border-radius:50%;background:#ff233d;box-shadow:0 0 10px 3px #e00025;animation:rise linear infinite;opacity:0}
+@keyframes rise{0%{transform:translateY(0) translateX(0) scale(.5);opacity:0}10%{opacity:.9}85%{opacity:.5}100%{transform:translateY(-110vh) translateX(var(--drift)) scale(1.5);opacity:0}}
+.scanlines{position:fixed;inset:0;z-index:5;pointer-events:none;opacity:.09;background:repeating-linear-gradient(to bottom,transparent 0 3px,#ff1a31 4px,transparent 5px)}
+.cursor-glow{position:fixed;width:280px;height:280px;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(255,0,36,.12),transparent 68%);transform:translate(-50%,-50%)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:linear-gradient(90deg,#9d0015,#ff102b,#ff6a7a);box-shadow:0 0 14px #ff102b;transform-origin:0 50%;transform:scaleX(0)}
+.wrap{width:min(1180px,92%);margin:auto}.topbar{position:fixed;z-index:10;top:0;width:100%;background:rgba(4,2,3,.84);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{font-family:'Black Ops One',cursive;color:var(--red);font-size:clamp(1.15rem,3vw,1.8rem);letter-spacing:2px;text-shadow:0 0 18px #ff002c;transform:skew(-8deg)}.navlinks{display:flex;gap:clamp(14px,3vw,34px);align-items:center}.navlinks a{font-size:.78rem;letter-spacing:2px;font-weight:700;color:#d9cdd0;transition:.2s;position:relative;padding:4px 0}.navlinks a:after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:100%;background:var(--red);box-shadow:0 0 10px var(--red);transform:scaleX(0);transform-origin:0 50%;transition:transform .25s}.navlinks a:hover,.navlinks a.active{color:var(--red);text-shadow:0 0 12px var(--red)}.navlinks a:hover:after,.navlinks a.active:after{transform:scaleX(1)}.menu{display:none;background:none;color:var(--red);border:1px solid var(--line);padding:8px 12px}
+.hero{min-height:760px;min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:110px 0 70px;position:relative;isolation:isolate}.hero:before{content:"";position:absolute;z-index:-1;right:0;top:13%;width:57%;height:76%;background:radial-gradient(ellipse at 50% 50%,rgba(180,0,26,.34),transparent 65%),radial-gradient(ellipse at 30% 70%,rgba(80,0,14,.5),transparent 60%);filter:blur(28px);animation:hellpulse 6s ease-in-out infinite alternate}
+@keyframes hellpulse{to{transform:scale(1.1);opacity:.6}}
+.kicker{font-family:'Share Tech Mono',monospace;letter-spacing:4px;color:#e4b8bd;font-size:.8rem}.kicker:before{content:'// ';color:var(--red)}
+h1{font-family:'Black Ops One',cursive;font-weight:400;text-transform:uppercase;line-height:.96;font-size:clamp(3.7rem,9vw,7.4rem);margin:20px 0 14px;color:var(--red);letter-spacing:-2px;text-shadow:3px 3px 0 #4b000a,0 0 26px rgba(255,0,42,.48)}
+h1 span{display:block;color:#f8e9e9;font-size:.34em;letter-spacing:7px;margin-top:20px;text-shadow:none;font-family:'Rajdhani',sans-serif;font-weight:700}
+.glitch{position:relative;display:inline-block;font-style:normal}
+.glitch:before,.glitch:after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;pointer-events:none;opacity:.9}
+.glitch:before{color:#fff;text-shadow:-3px 0 #ff102b;animation:gl1 4.2s infinite steps(1)}
+.glitch:after{color:#ff5468;text-shadow:3px 0 #5a0011;animation:gl2 4.2s infinite steps(1)}
+@keyframes gl1{0%,88%,100%{clip-path:inset(0 0 100% 0);transform:none}89%{clip-path:inset(12% 0 62% 0);transform:translate(-5px,0)}91%{clip-path:inset(58% 0 14% 0);transform:translate(4px,0)}93%{clip-path:inset(30% 0 40% 0);transform:translate(-3px,0)}95%{clip-path:inset(0 0 100% 0)}}
+@keyframes gl2{0%,89%,100%{clip-path:inset(0 0 100% 0);transform:none}90%{clip-path:inset(66% 0 8% 0);transform:translate(5px,0)}92%{clip-path:inset(8% 0 70% 0);transform:translate(-4px,0)}94%{clip-path:inset(40% 0 30% 0);transform:translate(3px,0)}96%{clip-path:inset(0 0 100% 0)}}
+.role{font-family:'Share Tech Mono',monospace;color:#ff3149;letter-spacing:3px;font-size:.95rem;min-height:1.6em;margin:0 0 18px}.role:after{content:"▌";margin-left:4px;animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+.intro{max-width:530px;font-size:1.15rem;line-height:1.55;color:#d0c2c5}.intro strong{color:white}.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin:28px 0}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 22px;border:1px solid var(--red);background:linear-gradient(100deg,#b50020,#42000c);box-shadow:0 0 22px rgba(255,0,42,.2);font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:.25s;clip-path:polygon(0 0,92% 0,100% 28%,100% 100%,8% 100%,0 72%)}
+.btn:before{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);transform:skewX(-20deg);transition:left .55s}
+.btn:hover:before{left:130%}
+.btn:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(255,0,42,.6)}.btn.secondary{background:rgba(0,0,0,.45);border-color:#68202a}
+.social-mini{display:flex;gap:18px;margin-top:25px;flex-wrap:wrap}.social-mini a{color:#ff3149;font-family:'Share Tech Mono',monospace;font-size:.8rem;border-bottom:1px solid transparent}.social-mini a:hover{border-color:var(--red)}
+
+/* HERO ART — hailstones bouncing on a line */
+.hero-art{position:relative;min-height:420px;height:min(520px,62vh);display:flex;align-items:stretch}
+.stage{position:relative;width:100%;border:1px solid var(--line);background:linear-gradient(180deg,rgba(40,0,8,.35),rgba(5,3,4,.2));box-shadow:inset 0 0 60px rgba(255,0,35,.08),0 0 50px rgba(255,0,35,.1)}
+.stage:before,.stage:after{content:"";position:absolute;width:22px;height:22px;border:2px solid var(--red);pointer-events:none}
+.stage:before{top:-2px;left:-2px;border-right:0;border-bottom:0}.stage:after{bottom:-2px;right:-2px;border-left:0;border-top:0}
+#bounce{display:block;width:100%;height:100%}
+.hud{position:absolute;font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:3px;color:#ff3d51;pointer-events:none}
+.hud.tl{top:14px;left:16px}.hud.tr{top:14px;right:16px;color:#8c777b}.hud.bl{bottom:14px;left:16px;color:#e4b8bd}.hud.br{bottom:14px;right:16px;color:#8c777b}
+.hud i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);margin-right:8px;animation:blink 1.4s steps(1) infinite}
+
+/* ticker */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(40,0,8,.5);overflow:hidden;white-space:nowrap;padding:14px 0;position:relative}
+.ticker:before,.ticker:after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+.ticker:before{left:0;background:linear-gradient(90deg,var(--ink),transparent)}.ticker:after{right:0;background:linear-gradient(270deg,var(--ink),transparent)}
+.track{display:inline-flex;animation:tick 38s linear infinite}
+.track span{font-family:'Black Ops One',cursive;font-size:1.25rem;letter-spacing:4px;color:transparent;-webkit-text-stroke:1px rgba(255,16,43,.75);padding:0 22px}
+.track span.fill{color:var(--red);-webkit-text-stroke:0;text-shadow:0 0 16px rgba(255,0,42,.5)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+.section{padding:100px 0;position:relative}.section-head{margin-bottom:38px}.eyebrow{color:var(--red);font-family:'Share Tech Mono';letter-spacing:4px;font-size:.8rem}.section h2{font-family:'Black Ops One';font-weight:400;font-size:clamp(2rem,5vw,3.5rem);margin:12px 0;color:#f6e8e9;text-transform:uppercase}.section h2 span{color:var(--red)}.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:start}.copy{font-size:1.08rem;line-height:1.75;color:#cbbdc0}.copy p{margin-top:0}.traits{display:grid;gap:12px}.trait{background:linear-gradient(100deg,rgba(67,0,12,.52),rgba(9,3,4,.8));border:1px solid var(--line);padding:18px;display:flex;gap:15px;align-items:flex-start;transition:.25s;position:relative;overflow:hidden}.trait:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);box-shadow:0 0 14px var(--red);transform:scaleY(0);transition:transform .3s}.trait:hover:before{transform:scaleY(1)}.trait:hover{transform:translateX(5px);border-color:var(--red);box-shadow:0 0 25px #5b0011}.trait .symbol{font-size:1.5rem;color:var(--red);text-shadow:0 0 12px red}.trait h3{margin:0 0 5px;font-size:1rem;letter-spacing:2px;color:#fff}.trait p{margin:0;color:var(--muted);font-size:.95rem}
+.project{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;align-items:center;border:1px solid var(--line);background:linear-gradient(120deg,rgba(35,0,7,.85),rgba(5,3,4,.94));padding:clamp(22px,4vw,42px);position:relative;overflow:hidden}.project:after{content:'CTS-3';position:absolute;right:-20px;bottom:-65px;font-family:'Black Ops One';font-size:clamp(6rem,17vw,13rem);color:rgba(255,0,38,.045);pointer-events:none}.project h3{font-family:'Black Ops One';font-size:clamp(2rem,5vw,3.8rem);font-weight:400;color:var(--red);margin:8px 0}.project .sub{font-family:'Share Tech Mono';letter-spacing:5px;font-size:.85rem}.project p{color:#cbbdc0;line-height:1.7;font-size:1.05rem}
+.project-screen{min-height:280px;display:grid;place-items:center;background:radial-gradient(circle,#620014 0,#190309 42%,#030202 72%);border:1px solid rgba(255,0,42,.25);position:relative;overflow:hidden;transform-style:preserve-3d}
+.project-screen:before{content:'';position:absolute;width:210px;height:210px;border:1px solid #ff1a3d;border-radius:50%;box-shadow:0 0 35px #9b0018,inset 0 0 30px #9b0018;animation:ringpulse 3.5s ease-in-out infinite alternate}
+@keyframes ringpulse{to{transform:scale(1.08);opacity:.6}}
+.project-mark{text-align:center;position:relative;text-shadow:0 0 25px #ff002b}.project-mark strong{display:block;font-family:'Black Ops One';font-size:clamp(2.5rem,7vw,5rem);font-style:italic}.project-mark em{display:block;color:var(--red);font-family:'Black Ops One';font-size:2.4rem}.project-mark small{font-family:'Share Tech Mono';letter-spacing:4px}
+.project-features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}.feature{border-left:2px solid var(--red);padding:10px 14px;background:rgba(255,0,35,.035);transition:.25s}.feature:hover{background:rgba(255,0,35,.12);padding-left:20px}.feature b{display:block;color:white;letter-spacing:1px}.feature small{color:var(--muted);font-size:.9rem}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;perspective:900px}.value{padding:24px;border:1px solid var(--line);background:rgba(12,3,5,.8);min-height:165px;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s ease-out,border-color .25s,box-shadow .25s;will-change:transform}.value:hover{border-color:var(--red);box-shadow:0 0 30px rgba(255,0,42,.25)}.value .number{color:var(--red);font-family:'Share Tech Mono';font-size:.8rem}.value h3{font-size:1.2rem;letter-spacing:2px;margin:15px 0 8px}.value p{color:var(--muted);line-height:1.5;margin:0}
+.social-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.social-card{border:1px solid var(--line);background:rgba(13,3,5,.8);padding:22px 12px;text-align:center;transition:.25s}.social-card:hover{background:rgba(100,0,18,.28);transform:translateY(-5px);box-shadow:0 0 25px rgba(255,0,42,.2);border-color:var(--red)}.social-card .ico{font-size:1.7rem;color:var(--red);display:block;margin-bottom:10px}.social-card b{display:block;letter-spacing:1px}.social-card small{display:block;color:var(--muted);margin-top:5px;overflow-wrap:anywhere}
+.final-call{text-align:center;padding:75px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(ellipse,rgba(120,0,20,.28),transparent 68%)}.final-call h2{font-family:'Black Ops One';font-weight:400;font-size:clamp(2.4rem,7vw,5rem);color:var(--red);margin:10px 0;text-shadow:0 0 30px rgba(255,0,42,.35)}.final-call p{color:var(--muted);font-size:1.1rem}.footer{padding:24px 0;color:#8c777b;font-family:'Share Tech Mono';font-size:.75rem;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.footer b{color:var(--red)}
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}.backtop{position:fixed;right:20px;bottom:20px;width:42px;height:42px;display:grid;place-items:center;background:#30000a;border:1px solid var(--red);color:white;z-index:8;box-shadow:0 0 20px #40000b;transition:.2s}.backtop:hover{background:var(--red);transform:translateY(-3px)}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:130px;min-height:auto}.hero-art{min-height:340px;height:360px;grid-row:1}.hero-copy{padding-bottom:20px}.about-grid,.project{grid-template-columns:1fr}.project-screen{min-height:250px}.social-grid{grid-template-columns:repeat(2,1fr)}.social-card:last-child{grid-column:span 2}.values{grid-template-columns:1fr}.section{padding:75px 0}.navlinks{gap:12px}.navlinks a{font-size:.68rem;letter-spacing:1px}}
+@media(max-width:520px){.nav{height:64px}.navlinks{display:none;position:absolute;top:64px;left:0;width:100%;padding:18px 4%;background:#090304;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.navlinks.open{display:flex}.navlinks a{font-size:.85rem;padding:5px 0}.menu{display:block}.hero-art{min-height:300px;height:320px}.hud.tr,.hud.br{display:none}.intro{font-size:1.02rem}h1{font-size:3.7rem}.project-features{grid-template-columns:1fr}.footer{justify-content:center;text-align:center}.social-grid{gap:8px}.social-card{padding:18px 8px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="embers" aria-hidden="true"></div><div class="scanlines" aria-hidden="true"></div><div class="cursor-glow" id="glow" aria-hidden="true"></div>
+<header class="topbar"><div class="wrap nav"><a class="logo" href="#home">HAILSTONES</a><nav class="navlinks" id="navlinks"><a href="#home">HOME</a><a href="#about">ABOUT</a><a href="#projects">PROJECTS</a><a href="#connect">SOCIALS</a></nav><button class="menu" id="menu" aria-label="Toggle navigation">☰ MENU</button></div><div class="progress" id="progress"></div></header>
+<main>
+<section class="hero wrap" id="home">
+ <div class="hero-copy">
+  <div class="kicker">WELCOME TO MY WORLD</div>
+  <h1><em class="glitch" data-text="Hailstones">Hailstones</em><span>DEVELOPER&nbsp; · &nbsp;CREATOR&nbsp; · &nbsp;DREAMER</span></h1>
+  <p class="role" id="role" aria-live="off"></p>
+  <p class="intro">I build digital experiences, create games, and turn ideas into reality. I'm <strong>Hailstones</strong> — a front-end and back-end developer, game creator, and a guy who just loves life, art and technology.</p>
+  <p class="intro">This is my corner of the internet: a place for the things I'm building, the ideas I'm chasing, and the projects that keep me curious. <strong>I'm still learning, still creating, and just getting started.</strong></p>
+  <div class="cta-row"><a class="btn" href="#projects">Explore My Work ↗</a><a class="btn secondary" href="#connect">Find Me Online</a></div>
+  <div class="social-mini"><a href="https://x.com/iamhailstones" target="_blank" rel="noopener">X / @iamhailstones</a><a href="https://github.com/iamhailstones" target="_blank" rel="noopener">GITHUB</a><a href="https://www.tiktok.com/@iamhailstones" target="_blank" rel="noopener">TIKTOK</a></div>
+ </div>
+ <div class="hero-art" role="img" aria-label="Glowing hailstones bouncing on a red line">
+  <div class="stage">
+   <canvas id="bounce"></canvas>
+   <div class="hud tl"><i></i>HAILSTONES</div><div class="hud tr">IMPACTS: <span id="hits">0</span></div>
+   <div class="hud bl">BUILD · CREATE · SURVIVE</div><div class="hud br">CLICK TO DROP ONE</div>
+  </div>
+ </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section class="section" id="about"><div class="wrap reveal"><div class="section-head"><div class="eyebrow">01 / THE PERSON BEHIND THE SCREEN</div><h2>Who is <span>Hailstones?</span></h2></div><div class="about-grid"><div class="copy"><p>I'm a developer and creative mind who enjoys taking an idea and making something real out of it. I work across front-end and back-end development, explore how software works, and build projects that give me room to experiment.</p><p>I'm also a game creator. I like the mix of design, logic, action and storytelling that makes a game feel like more than just code on a screen. My current project, <strong>GHOST CTS-3</strong>, brings that mindset together with something else I enjoy: Python.</p><p>I don't claim to know everything. I'm learning as I build, testing ideas, breaking things, fixing them, and sharing the journey. I want my work to show curiosity, effort and a willingness to try something different.</p><p>Outside the code, I'm a guy who loves life and art, enjoys connecting with people, and believes you can be serious about building something without losing your personality.</p><p style="color:#ff3149;font-family:'Black Ops One';font-size:1.5rem">CODE&nbsp; × &nbsp;ART&nbsp; × &nbsp;FREEDOM</p></div><div class="traits"><article class="trait"><div class="symbol">⌘</div><div><h3>FRONT-END & BACK-END</h3><p>Building web experiences and learning how the pieces work together.</p></div></article><article class="trait"><div class="symbol">⌁</div><div><h3>GAME CREATOR</h3><p>Turning ideas into playable worlds, systems and challenges.</p></div></article><article class="trait"><div class="symbol">◈</div><div><h3>LIFELONG LEARNER</h3><p>Exploring code, technology and new ways to solve problems.</p></div></article><article class="trait"><div class="symbol">♡</div><div><h3>JUST A GUY</h3><p>Who loves life, art, technology and making things that feel like me.</p></div></article></div></div></div></section>
+<section class="section" id="projects"><div class="wrap reveal"><div class="section-head"><div class="eyebrow">02 / CURRENTLY BUILDING</div><h2>Projects from <span>the shadows.</span></h2></div><article class="project"><div><div class="eyebrow">FEATURED PROJECT</div><h3>GHOST CTS-3</h3><div class="sub">CODE TO SURVIVE</div><p>GHOST CTS-3 is a browser-based action shooter built around a simple idea: make learning Python feel more interactive. Instead of keeping programming concepts inside a textbook, the game connects them to the mechanics of surviving a fight.</p><p>It combines a soldier-style action experience with Python-inspired systems. The project is evolving as I test it, improve the gameplay, and explore how to make the coding ideas clearer and more fun.</p><a class="btn" href="https://iamhailstones.github.io/ghostcts3/" target="_blank" rel="noopener">Play GHOST CTS-3 ↗</a></div><div><div class="project-screen" id="tiltscreen"><div class="project-mark"><strong>GHOST</strong><em>CTS-3</em><small>CODE TO SURVIVE</small></div></div><div class="project-features"><div class="feature"><b>PYTHON-INSPIRED GAMEPLAY</b><small>Programming ideas connected to game mechanics.</small></div><div class="feature"><b>ACTION & SURVIVAL</b><small>Fight enemy soldiers, survive and keep moving.</small></div><div class="feature"><b>GUNS, LISTS & TUPLES</b><small>Explore data concepts through game systems.</small></div><div class="feature"><b>AN EVOLVING PROJECT</b><small>Gameplay and new ideas are still being developed.</small></div></div></div></article></div></section>
+<section class="section"><div class="wrap reveal"><div class="section-head"><div class="eyebrow">03 / WHAT DRIVES ME</div><h2>Built on <span>curiosity.</span></h2></div><div class="values"><article class="value"><div class="number">[ 001 ]</div><h3>MAKE IT REAL</h3><p>Ideas are great, but I learn the most when I build, test and improve something that actually exists.</p></article><article class="value"><div class="number">[ 002 ]</div><h3>LEARN BY DOING</h3><p>I like exploring how things work and using personal projects to turn lessons into practical experience.</p></article><article class="value"><div class="number">[ 003 ]</div><h3>KEEP IT DIFFERENT</h3><p>I enjoy mixing code, art, games and my own style instead of being afraid to try an unusual idea.</p></article></div></div></section>
+<section class="section" id="connect"><div class="wrap reveal"><div class="section-head"><div class="eyebrow">04 / OPEN THE PORTAL</div><h2>Find me <span>online.</span></h2><p class="copy">I share projects, updates, experiments, memes, and bits of the journey. Follow along and see what I'm creating next.</p></div><div class="social-grid"><a class="social-card" href="https://x.com/iamhailstones" target="_blank" rel="noopener"><span class="ico">𝕏</span><b>X / TWITTER</b><small>@iamhailstones</small></a><a class="social-card" href="https://instagram.com/iamhailstones_/" target="_blank" rel="noopener"><span class="ico">◎</span><b>INSTAGRAM</b><small>@iamhailstones</small></a><a class="social-card" href="https://www.tiktok.com/@iamhailstones" target="_blank" rel="noopener"><span class="ico">♪</span><b>TIKTOK</b><small>@iamhailstones</small></a><a class="social-card" href="https://github.com/iamhailstones" target="_blank" rel="noopener"><span class="ico">⌘</span><b>GITHUB</b><small>Code & projects</small></a><a class="social-card" href="https://youtube.com/" target="_blank" rel="noopener"><span class="ico">▶</span><b>YOUTUBE</b><small>Video platform</small></a></div></div></section>
+<section class="final-call"><div class="eyebrow">THE STORY IS STILL BEING WRITTEN</div><h2>STAY REAL. KEEP BUILDING.</h2><p>One idea. One line of code. One project at a time.</p><a class="btn" href="#home">Return to the surface ↑</a></section>
+</main>
+<footer class="wrap footer"><span>© <span id="year">2026</span> <b>HAILSTONES</b> · BUILT WITH INTENTION</span><span>BUILD <b>·</b> CREATE <b>·</b> SURVIVE</span></footer>
+<a class="backtop" href="#home" aria-label="Back to top">↑</a>
+<script>
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* embers */
+const emberBox=document.getElementById('embers');
+for(let i=0;i<52;i++){const e=document.createElement('i');e.className='ember';e.style.left=Math.random()*100+'%';e.style.animationDuration=(7+Math.random()*12)+'s';e.style.animationDelay=(-Math.random()*18)+'s';e.style.setProperty('--drift',(Math.random()*150-75)+'px');e.style.opacity=Math.random();emberBox.appendChild(e)}
+
+/* nav */
+const menu=document.getElementById('menu'),nav=document.getElementById('navlinks');menu.addEventListener('click',()=>nav.classList.toggle('open'));nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* reveal */
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+/* cursor glow + year */
+const glow=document.getElementById('glow');window.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'},{passive:true});document.getElementById('year').textContent=new Date().getFullYear();
+
+/* scroll progress + active nav link */
+const bar=document.getElementById('progress');
+const links=[...nav.querySelectorAll('a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+function onScroll(){
+  const h=document.documentElement.scrollHeight-innerHeight;
+  bar.style.transform='scaleX('+(h>0?scrollY/h:0)+')';
+  let cur=0;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<innerHeight*.4)cur=i});
+  links.forEach((a,i)=>a.classList.toggle('active',i===cur));
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ticker */
+const words=['CODE','×','ART','×','FREEDOM','×','GHOST CTS-3','×','PYTHON','×','BUILD','×','CREATE','×','SURVIVE','×'];
+const track=document.getElementById('track');
+let html='';for(let k=0;k<2;k++){words.forEach((w,i)=>{html+='<span class="'+(i%4===0?'fill':'')+'">'+w+'</span>'})}
+track.innerHTML=html+html;
+
+/* typed role line */
+const roleEl=document.getElementById('role');
+const roles=['> front-end dev','> back-end dev','> game creator','> python learner','> still building'];
+if(reduce){roleEl.textContent=roles[0]}else{
+  let ri=0,ci=0,del=false;
+  (function type(){
+    const w=roles[ri];
+    roleEl.textContent=w.slice(0,ci);
+    if(!del&&ci<w.length){ci++;setTimeout(type,70)}
+    else if(!del){del=true;setTimeout(type,1400)}
+    else if(ci>2){ci--;setTimeout(type,35)}
+    else{del=false;ri=(ri+1)%roles.length;setTimeout(type,200)}
+  })();
+}
+
+/* HAILSTONES BOUNCING ON A LINE */
+(function(){
+  const cv=document.getElementById('bounce'),ctx=cv.getContext('2d'),hitsEl=document.getElementById('hits');
+  let W=0,H=0,hits=0;
+  function size(){const d=Math.min(devicePixelRatio||1,2),r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0)}
+  size();addEventListener('resize',size);
+
+  // x = fraction of width, r = radius, T = seconds per bounce, ph = phase offset
+  const stones=[
+    {x:.14,r:17,T:1.35,ph:.00},
+    {x:.32,r:26,T:1.85,ph:.35},
+    {x:.50,r:35,T:2.30,ph:.10},
+    {x:.68,r:24,T:1.70,ph:.65},
+    {x:.86,r:16,T:1.25,ph:.25}
+  ];
+  const ripples=[],sparks=[];
+  let last=stones.map(()=>0);
+
+  function groundY(){return H*.78}
+
+  function drawStone(x,cy,r,sx,sy){
+    ctx.save();
+    ctx.translate(x,cy);ctx.scale(sx,sy);
+    ctx.shadowColor='#ff102b';ctx.shadowBlur=24;
+    const g=ctx.createRadialGradient(-r*.35,-r*.4,r*.1,0,0,r);
+    g.addColorStop(0,'#ffffff');g.addColorStop(.45,'#f0d9de');g.addColorStop(.8,'#a8465a');g.addColorStop(1,'#5a0011');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;
+    ctx.strokeStyle='rgba(255,255,255,.55)';ctx.lineWidth=Math.max(1,r*.07);
+    ctx.beginPath();ctx.arc(0,0,r*.72,Math.PI*1.1,Math.PI*1.55);ctx.stroke();
+    ctx.strokeStyle='rgba(255,16,43,.35)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(-r*.2,-r*.1);ctx.lineTo(r*.1,r*.25);ctx.lineTo(r*.4,r*.05);ctx.stroke();
+    ctx.restore();
+  }
+
+  function frame(t){
+    ctx.clearRect(0,0,W,H);
+    const gy=groundY();
+
+    // the line
+    const lg=ctx.createLinearGradient(0,0,W,0);
+    lg.addColorStop(0,'rgba(255,16,43,0)');lg.addColorStop(.12,'rgba(255,16,43,.9)');lg.addColorStop(.88,'rgba(255,16,43,.9)');lg.addColorStop(1,'rgba(255,16,43,0)');
+    ctx.save();ctx.strokeStyle=lg;ctx.lineWidth=2;ctx.shadowColor='#ff102b';ctx.shadowBlur=18;
+    ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();ctx.restore();
+    // floor haze
+    const fg=ctx.createLinearGradient(0,gy,0,H);fg.addColorStop(0,'rgba(255,16,43,.14)');fg.addColorStop(1,'rgba(255,16,43,0)');
+    ctx.fillStyle=fg;ctx.fillRect(0,gy,W,H-gy);
+
+    // ripples on the line
+    for(let i=ripples.length-1;i>=0;i--){
+      const rp=ripples[i],a=1-(t-rp.t)/.7;
+      if(a<=0){ripples.splice(i,1);continue}
+      const rw=rp.r*(1.2+(1-a)*3.2);
+      ctx.strokeStyle='rgba(255,70,90,'+(a*.8)+')';ctx.lineWidth=2;
+      ctx.beginPath();ctx.ellipse(rp.x,gy,rw,rw*.12,0,0,Math.PI*2);ctx.stroke();
+    }
+
+    stones.forEach((s,i)=>{
+      const x=s.x*W;
+      const p=((t/s.T)+s.ph)%1;
+      if(p<last[i]){ // landed
+        hits++;hitsEl.textContent=hits;
+        ripples.push({x,t,r:s.r});
+        for(let k=0;k<5;k++)sparks.push({x,y:gy,vx:(Math.random()-.5)*160,vy:-60-Math.random()*110,life:1});
+      }
+      last[i]=p;
+      const u=p*2-1;
+      const hmax=Math.min(H*(.2+.14*s.T),gy-s.r*2-18);
+      const h=hmax*(1-u*u);
+      // squash near the line
+      const d=Math.min(p,1-p);
+      const sq=Math.max(0,1-d/.05);
+      const sx=1+.22*sq,sy=1-.24*sq;
+      const cy=gy-s.r*sy-h;
+      // shadow on the line
+      const sa=.55*(1-h/hmax*.8);
+      ctx.fillStyle='rgba(255,16,43,'+(sa*.35)+')';
+      ctx.beginPath();ctx.ellipse(x,gy+3,s.r*(1.15-.5*h/hmax)*sx,s.r*.16,0,0,Math.PI*2);ctx.fill();
+      drawStone(x,cy,s.r,sx,sy);
+    });
+
+    // sparks
+    for(let i=sparks.length-1;i>=0;i--){
+      const sp=sparks[i];sp.life-=.035;
+      if(sp.life<=0){sparks.splice(i,1);continue}
+      sp.x+=sp.vx*.016;sp.y+=sp.vy*.016;sp.vy+=9;
+      ctx.fillStyle='rgba(255,90,110,'+sp.life+')';ctx.fillRect(sp.x,sp.y,2,2);
+    }
+  }
+
+  if(reduce){frame(.6);addEventListener('resize',()=>frame(.6));return}
+
+  // click / tap = drop an extra hailstone that bounces a few times then fades
+  const extra=[];
+  cv.addEventListener('pointerdown',e=>{
+    const r=cv.getBoundingClientRect();
+    stones.push({x:(e.clientX-r.left)/r.width,r:12+Math.random()*14,T:1.1+Math.random()*1.2,ph:.5,temp:true,born:performance.now()});
+    last.push(0);
+    if(stones.length>9){stones.splice(5,1);last.splice(5,1)}
+  });
+
+  const t0=performance.now();
+  (function loop(now){frame((now-t0)/1000);requestAnimationFrame(loop)})(t0);
+})();
+
+/* tilt cards */
+if(matchMedia('(hover:hover)').matches&&!reduce){
+  document.querySelectorAll('.value').forEach(c=>{
+    c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.setProperty('--ry',(x*10)+'deg');c.style.setProperty('--rx',(-y*10)+'deg')});
+    c.addEventListener('pointerleave',()=>{c.style.setProperty('--ry','0deg');c.style.setProperty('--rx','0deg')});
+  });
+  const ts=document.getElementById('tiltscreen');
+  ts.style.transition='transform .15s ease-out';
+  ts.addEventListener('pointermove',e=>{const r=ts.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;ts.style.transform='perspective(800px) rotateY('+(x*8)+'deg) rotateX('+(-y*8)+'deg)'});
+  ts.addEventListener('pointerleave',()=>{ts.style.transform=''});
+}
+</script>
+</body>
+</html>
